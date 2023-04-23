@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { commentActions } from 'src/app/store/actions/comment.actions';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
+import { PointerComponent } from '../pointer/pointer.component';
 
 @Component({
+  standalone:true,
+  imports: [PointerComponent],
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.css']
@@ -16,21 +17,15 @@ export class CommentComponent implements OnInit {
   @Input() user?: string;
   @Input() creation_date?: Date;
   @Input() description?: string;
+  @Input() imgLogo="assets/img/default-logo.jpg"
   //@Input() creation_date: Date;
  // @Output() levelClicked: EventEmitter<number> = new EventEmitter<number>();
 
 
-  constructor(private store:Store) { 
-    this.store.dispatch(
-      commentActions.getcomments({comments:[]})
-    )
-    this.store.subscribe((data)=>{
-      console.log("Store...",data);     
-    })
-  }
+  constructor(){}
 
   ngOnInit(): void {
-    
+
   }
 
 }

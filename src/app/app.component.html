@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<header>
+  <div class="btn-group">
+    <a routerLink="main/main" class="btn btn-primary" aria-current="page" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="about" class="btn btn-primary"  routerLinkActive="active">About</a>
+  </div>
+
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

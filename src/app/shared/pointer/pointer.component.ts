@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
+  standalone:true,
   selector: 'app-pointer',
   templateUrl: './pointer.component.html',
   styleUrls: ['./pointer.component.css']

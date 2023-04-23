@@ -1,5 +1,14 @@
-<div>
-    <app-pointer></app-pointer>
-    {{user}} {{creation_date}}
-    {{description}}
+<div class="comment-box">
+    <div class="pointer-score">
+      <app-pointer></app-pointer>
+    </div>
+
+    <div class="texto">
+      <img class="img_logo" [src]="imgLogo"> <strong>{{user}}</strong> {{'1 month Ago'}}
+      <div>
+        {{description}}
+      </div>
+    </div>
+
+
 </div>

@@ -1,10 +1,10 @@
 export interface User{
 
-        image: Image,
-        username: string
+    image?: Image,
+    username?: string
 }
 
-export interface Image{ 
+export interface Image{
     png: string,
     webp: string
 }

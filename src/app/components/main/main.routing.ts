@@ -1,10 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { Routes} from '@angular/router';
 import { MainComponent } from './pages/main.component';
 
 
-const routes: Routes = [
-  
+export const MAIN_ROUTES: Routes = [
   // Security routes
   { path: 'main', component: MainComponent },
   /*{ path: 'token', component: TokenComponent },
@@ -12,9 +10,3 @@ const routes: Routes = [
   // Default route
   { path: '', redirectTo: 'main', pathMatch: 'full' },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class MainRouting { }

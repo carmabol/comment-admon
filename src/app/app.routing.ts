@@ -7,11 +7,19 @@ const routes: Routes = [
   // Default route
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   // Security routes
+
+  {
+    path: 'about',
+    // component: AboutComponent,
+    loadComponent: () =>
+      import('./components/about/about.component').then((mod) => mod.AboutComponent),
+  },
+
   {
     path: 'main',
     loadChildren: () =>
-      import('./components/main/main.module').then(
-        (m) => m.MainModule
+      import('../app/components/main/main.routing').then(
+        (m) => m.MAIN_ROUTES
       ),
   },
   // Unknown routes
@@ -19,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
