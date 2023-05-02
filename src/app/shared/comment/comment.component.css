@@ -3,6 +3,7 @@
   flex-direction: row;
   background-color: white;
   width:50vw;
+  border-radius: 2%;
 }
 
 .img_logo{
@@ -18,4 +19,18 @@
 .texto{
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.flex-user{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.padd-button{
+  padding-right: 10px;
+}
+
+.button-text{
+  color: white;
 }

@@ -1,0 +1,13 @@
+
+<ng-container  *ngFor="let comment of commentList">
+  <app-comment
+    [comment]="comment"
+    [flagSelf]="false"
+  ></app-comment>
+
+  <ng-container  *ngFor="let reply of comment.replies">
+    <app-comment
+    [comment]="reply"
+    ></app-comment>
+  </ng-container>
+</ng-container>

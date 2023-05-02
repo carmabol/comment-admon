@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map } from "rxjs/operators";
-import { commentActions } from "../actions/comment.actions";
 import { userActions } from "../actions/user.actions";
 
 @Injectable()

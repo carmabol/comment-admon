@@ -3,9 +3,9 @@
     <img class="img_logo" [src]="imgLogo">
   </div>
   <div class="separator-elements">
-    <textarea rows="4" cols="50" placeholder="Type something"></textarea>
+    <textarea rows="4" cols="75" placeholder="Type something"></textarea>
   </div>
   <div class="separator-elements">
-    <button class="btn btn-primary">Reply</button>
+    <button class="btn btn-primary">{{isReply?'Reply':'Send'}}</button>
   </div>
 </div>

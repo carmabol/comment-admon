@@ -1,14 +1,26 @@
 <div class="comment-box">
-    <div class="pointer-score">
-      <app-pointer></app-pointer>
-    </div>
+  <div class="pointer-score">
+    <app-pointer (levelPlus)="increaseScoreComment()" (levelMinus)="decreaseScoreComment()"
+      [points]="comment?comment.score:0"
+    ></app-pointer>
+  </div>
 
-    <div class="texto">
-      <img class="img_logo" [src]="imgLogo"> <strong>{{user}}</strong> {{'1 month Ago'}}
+  <div class="texto">
+    <div class="flex-user">
       <div>
-        {{description}}
-      </div>
+      <img class="img_logo" [src]="comment && comment.user&& comment.user.image ? comment.user.image.png :'assets/img/default-logo.jpg'"> &nbsp; <strong>{{comment&&comment.user ?comment.user.username:''}}</strong> {{comment?.createdAt}}
+    </div>
+    <div class="padd-button button-text">
+      <button type="button" class="btn btn-danger" *ngIf="flagSelf" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>&nbsp;
+      <button type="button" class="btn btn-warning"*ngIf="flagSelf">Edit</button>
+      <button type="button" class="btn btn-info" *ngIf="!flagSelf">Reply</button>
+    </div>
     </div>
 
-
+    <div>
+      {{comment?comment.content:''}}
+    </div>
+  </div>
 </div>
+
+

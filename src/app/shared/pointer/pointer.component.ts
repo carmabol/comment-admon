@@ -8,7 +8,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PointerComponent implements OnInit {
   @Input() points:number=0;
-  @Output() levelClicked: EventEmitter<number> = new EventEmitter<number>();
+  @Output() levelPlus: EventEmitter<number> = new EventEmitter<number>();
+  @Output() levelMinus: EventEmitter<number> = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {
@@ -16,12 +17,12 @@ export class PointerComponent implements OnInit {
 
   increase(){
     this.points++;
-    this.levelClicked.emit(this.points);
+    this.levelPlus.emit(this.points);
   }
 
   decrease(){
     this.points--;
-    this.levelClicked.emit(this.points);
+    this.levelMinus.emit(this.points);
   }
 
 }

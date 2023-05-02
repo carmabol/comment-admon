@@ -6,4 +6,10 @@ export interface Comment{
     createdAt: string,
     score: number,
     user: User,
+    replies: Reply[];
+}
+
+export interface Reply extends Comment{
+  replyTo:string;
+
 }

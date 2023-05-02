@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ReplyComponent {
   @Input() imgLogo="assets/img/default-logo.jpg"
+  @Input() isReply=true;
 
 }
