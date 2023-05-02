@@ -13,15 +13,7 @@ import { PointerComponent } from '../pointer/pointer.component';
 })
 export class CommentComponent {
   @Input() comment?:Comment;
-  @Input() username?: string;
-  @Input() description?: string;
-  @Input() imgLogo?:string="assets/img/default-logo.jpg"
-  @Input() createdAt?:string;
-  @Input() content?:string;
-  @Input() score:number=0;
-
   @Input() flagSelf=true;
-  @Input() creation_date?: Date;
 
   constructor(private store:Store){
 
@@ -32,7 +24,6 @@ export class CommentComponent {
     this.store.dispatch(
       commentsActions.updatescoreplus({commentId:this.comment?.id})
     )
-
   }
 
   decreaseScoreComment(){

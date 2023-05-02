@@ -27,20 +27,6 @@ export class MainComponent implements OnInit {
     this.store.dispatch(
       userActions.getuser({user:{}})
     )
-/*
-    this.store.dispatch(
-      commentsActions.updatescoreplus({commentId:1})
-    )
-
-    this.store.dispatch(
-      commentsActions.updatescoreminus({commentId:1})
-    )
-    */
-  /*
-    this.store.subscribe((data)=>{
-      console.log("Store Elements...",data);
-    })
-  */
 
   }
 
