@@ -7,6 +7,7 @@ import { ReplyComponent } from 'src/app/shared/reply/reply.component';
 import { commentsActions } from 'src/app/store/actions/comment.actions';
 import { userActions } from 'src/app/store/actions/user.actions';
 import { Comment } from 'src/app/store/models/comment.model';
+import { User } from 'src/app/store/models/user.model';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +19,7 @@ import { Comment } from 'src/app/store/models/comment.model';
 export class MainComponent implements OnInit {
   today:Date=new Date();
   commentList$:Observable<ReadonlyArray<Comment>> | undefined;
+  user$:Observable<User> | undefined;
 
   constructor(private store:Store) {
     this.store.dispatch(
@@ -41,6 +43,16 @@ export class MainComponent implements OnInit {
         console.log("Comentarios",data);
       }
     )
+
+    const user = createFeatureSelector<User>('user');
+    this.user$=this.store.select(user);
+
+    this.user$.subscribe(
+      (data)=>{
+        console.log("Usuario Logueado",data);
+      }
+    )
+
   }
 
 }

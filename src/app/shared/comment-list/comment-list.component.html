@@ -1,13 +1,27 @@
 
-<ng-container  *ngFor="let comment of commentList">
-  <app-comment
+<ng-container  *ngFor="let comment of commentList" >
+  <app-comment (scoreActions)="updateScoreComments($event)"
     [comment]="comment"
-    [flagSelf]="false"
+    [userLogged]="userLogged"
+    [flagSelf]="userLogged.username===comment.user.username"
   ></app-comment>
 
-  <ng-container  *ngFor="let reply of comment.replies">
-    <app-comment
-    [comment]="reply"
-    ></app-comment>
-  </ng-container>
+    <ng-container  *ngFor="let reply of comment.replies">
+      <app-comment (scoreActions)="updateScoreReplies($event,comment)"
+      [comment]="reply"
+      [userLogged]="userLogged"
+      [flagSelf]="userLogged.username===reply.user.username"
+      ></app-comment>
+
+  <!--
+      <app-reply
+      [userLogged]="userLogged"
+      [parentId]="comment.id"
+      [isReply]="true"
+      [replyingTo]="reply.replyTo ?? comment.user?.username ?? ''"
+      ></app-reply>
+  -->
+    </ng-container>
+
+
 </ng-container>

@@ -7,9 +7,9 @@ const initialStateUser:User={};
 export const userReducer = createReducer(initialStateUser,
     on(
     userActions.filluser,
-    (state,user)=>{
+    (_state,{user}):User=>{
         console.log(user);
-        return {...state, user}
+        return user;
     }
     ))
 

@@ -12,10 +12,10 @@ export class UserEffects {
                 map(()=>{
                     const userLoaded={
                       image: {
-                        png: 'xxx.png',
+                        png: '/assets/images/avatars/image-juliusomo.png',
                         webp: 'xxx.webp'
                     },
-                      username: "carmabol"
+                      username: "juliusomo"
                     } as any;
                     return (userActions.filluser({user:userLoaded}))
                 }

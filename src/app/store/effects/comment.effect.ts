@@ -44,6 +44,7 @@ export class CommentEffects {
                             "createdAt": "1 week ago",
                             "score": 4,
                             "replyingTo": "maxblagun",
+                            "replyingParent":2,
                             "user": {
                               "image": {
                                 "png": "/assets/images/avatars/image-ramsesmiron.png",
@@ -58,6 +59,7 @@ export class CommentEffects {
                             "createdAt": "2 days ago",
                             "score": 2,
                             "replyingTo": "ramsesmiron",
+                            "replyingParent":2,
                             "user": {
                               "image": {
                                 "png": "/assets/images/avatars/image-juliusomo.png",

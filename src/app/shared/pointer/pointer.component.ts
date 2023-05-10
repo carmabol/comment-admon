@@ -16,13 +16,11 @@ export class PointerComponent implements OnInit {
   }
 
   increase(){
-    this.points++;
-    this.levelPlus.emit(this.points);
+    this.levelPlus.emit();
   }
 
   decrease(){
-    this.points--;
-    this.levelMinus.emit(this.points);
+    this.levelMinus.emit();
   }
 
 }

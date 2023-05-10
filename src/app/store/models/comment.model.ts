@@ -11,5 +11,6 @@ export interface Comment{
 
 export interface Reply extends Comment{
   replyTo:string;
+  replyingParent:number,
 
 }
