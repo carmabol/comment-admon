@@ -35,6 +35,17 @@ export class CommentListComponent implements OnInit {
     )
     */
 
+    /** update comment
+    this.store.dispatch(
+      commentsActions.updatecomment({commentId:2,content:'Titi si yo te estoy queriendo mucho'})
+    )
+    */
+
+    /** update comment reply
+    this.store.dispatch(
+      commentsActions.updatecommentreply({commentId:4,content:'Titi si yo te estoy queriendo mucho',idParent:2})
+    )
+    */
   }
 
   updateScoreComments(actualizar:{comment:Comment,increase:boolean}){

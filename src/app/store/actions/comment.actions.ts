@@ -14,5 +14,7 @@ export const commentsActions=createActionGroup(
             createCommentReply:props<{comment:string,user:User,replyingTo:string,idParent:number}>(),
             deleteComment:props<{commentId:number}>(),
             deleteCommentReply:props<{commentId:number,parentId:number}>(),
+            updateComment:props<{commentId:number,content:string}>(),
+            updateCommentReply:props<{commentId:number,content:string,idParent:number}>(),
         }
     })

@@ -207,6 +207,63 @@ export const commentReducer = createReducer(initialStateComment,
                 return currentCommentListRO;
               }
               ),
+              on(
+                commentsActions.updatecomment,
+                (state,{commentId,content})=>{
+                  let currentCommentList = [...state];
+                  let commentToUpdate:Comment|undefined = currentCommentList.find( comment => comment.id === commentId);
+                  let commentToUpdateManual:Comment;
+                  let index=0;
+                  console.log("Before UpdateScore: ",state);
+                  if(commentToUpdate){
+                    const contentComment = content;
+                    commentToUpdateManual=
+                    {...commentToUpdate,
+                      content:contentComment
+                    }
+                    index=currentCommentList.indexOf(commentToUpdate)
+                    currentCommentList[index]=commentToUpdateManual;
+                  }
+                  console.log("UpdateComment: ",currentCommentList);
+                  let currentCommentListRO:readonly Comment[]=currentCommentList;
+                  return currentCommentListRO;
 
+                }
+                ),
+                on(
+                  commentsActions.updatecommentreply,
+                  (state,{commentId,content,idParent})=>{
+                    let currentCommentList = [...state];
+                    let parentCommentToUpdate:Comment|undefined = currentCommentList.find( comment => comment.id === idParent);
+                    let commentToUpdate=parentCommentToUpdate?.replies.find( comment => comment.id === commentId)
+                    let commentToUpdateManual:Reply;
+                    let index=0;
+                    let indexParent=0;
+                    console.log("Before UpdateScore: ",state);
+                    if(commentToUpdate&&parentCommentToUpdate){
+                      const contentComment = content;
+                      commentToUpdateManual=
+                      {...commentToUpdate,
+                        content:contentComment
+                      }
+
+                      index=parentCommentToUpdate?.replies?.indexOf(commentToUpdate);
+                      indexParent=currentCommentList.indexOf(parentCommentToUpdate);
+
+                      const replies=[...parentCommentToUpdate.replies];
+                      replies[index]={...commentToUpdateManual};
+                      currentCommentList[indexParent]={
+                        ...parentCommentToUpdate,
+                        replies: [
+                          ...replies
+                        ]
+                      } //commentToUpdateManual;
+                    }
+                    console.log("UpdateCommentReply: ",currentCommentList);
+                    let currentCommentListRO:readonly Comment[]=currentCommentList;
+                    return currentCommentListRO;
+
+                  }
+                  ),
     )
 
