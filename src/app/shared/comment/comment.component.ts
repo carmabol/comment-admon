@@ -18,6 +18,8 @@ export class CommentComponent {
   @Input() userLogged!:User;
   @Input() flagSelf=true;
   @Output() scoreActions:EventEmitter<{comment:Comment|Reply,increase:boolean}>=new EventEmitter();
+  @Output() saveCommentActions:EventEmitter<string>=new EventEmitter();
+  @Output() saveReplyActions:EventEmitter<string>=new EventEmitter();
   replyClicked:boolean=false;
 
 
@@ -35,5 +37,14 @@ getCommentReply(){
 
   replyClickedEvent(){
     this.replyClicked=true;
+  }
+
+  getCommentToSave(contentComment:string){
+    this.saveCommentActions.emit(contentComment);
+  }
+
+  getReplyToSave(contentComment:string){
+    console.log("Emit ReplyComment")
+    this.saveReplyActions.emit(contentComment);
   }
 }

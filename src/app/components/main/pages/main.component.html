@@ -11,7 +11,7 @@
   <app-reply [userLogged]="(user$ | async)!"></app-reply>
 </div>-->
 <div class="separator-comments">
-  <app-reply
+  <app-reply (savingComment)="saveComment($event)"
   [userLogged]="(user$ | async)!"
   [isReply]="false"
   ></app-reply>

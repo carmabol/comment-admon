@@ -19,7 +19,8 @@ import { User } from 'src/app/store/models/user.model';
 export class MainComponent implements OnInit {
   today:Date=new Date();
   commentList$:Observable<ReadonlyArray<Comment>> | undefined;
-  user$:Observable<User> | undefined;
+  user$!:Observable<User> | undefined;
+  userLogged!: User;
 
   constructor(private store:Store) {
     this.store.dispatch(
@@ -50,9 +51,16 @@ export class MainComponent implements OnInit {
     this.user$.subscribe(
       (data)=>{
         console.log("Usuario Logueado",data);
+        this.userLogged=data;
       }
     )
 
+  }
+
+  saveComment(commentContent:string){
+    this.store.dispatch(
+      commentsActions.createcomment({comment:commentContent,user:this.userLogged})
+    )
   }
 
 }

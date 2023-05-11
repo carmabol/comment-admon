@@ -24,7 +24,7 @@
 </div>
 
 <div class="separator-comments" *ngIf="replyClicked">
-  <app-reply
+  <app-reply (savingReply)="getReplyToSave($event)"
   [userLogged]="userLogged"
   [parentId]="getCommentReply().replyingParent"
   [isReply]="true"

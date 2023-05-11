@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as EventEmitter from 'events';
 import { commentsActions } from 'src/app/store/actions/comment.actions';
 import { User } from 'src/app/store/models/user.model';
 
@@ -17,10 +16,21 @@ export class ReplyComponent {
   @Input() replyingTo:string='';
   imgLogo="assets/img/default-logo.jpg";
   @ViewChild('areaComment') areaComment!: ElementRef;
+  @Output() savingComment:EventEmitter<string> = new EventEmitter<string>();
+  @Output() savingReply:EventEmitter<string> = new EventEmitter<string>();
   public areaContent:string='';
 
   constructor(private store:Store,private renderer: Renderer2){
 
+  }
+
+  sendComment(){
+    this.savingComment.emit(this.areaComment.nativeElement.value)
+  }
+
+  sendCommentReply(){
+    console.log("Emit Reply...")
+    this.savingReply.emit(this.areaComment.nativeElement.value)
   }
 
   createComment(){
@@ -40,10 +50,10 @@ export class ReplyComponent {
   saveComment(){
     console.log("clicked");
     if(!this.isReply){
-      this.createComment();
+      this.sendComment();
     }
     else{
-      this.createCommentReply();
+      this.sendCommentReply();
     }
   }
 

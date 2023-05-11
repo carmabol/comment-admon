@@ -38,4 +38,15 @@ export class CommentListComponent implements OnInit {
     )
   }
 
+  sendReplyOfComment(contentComment:string, replyingTo:string|undefined, parentId:number){
+    this.store.dispatch(
+      commentsActions.createcommentreply({comment:contentComment,user:this.userLogged,replyingTo:replyingTo!==undefined?replyingTo:'',idParent:parentId})
+    )
+  }
+
+  sendReplyOfReply(contentComment:string, replyingTo:string|undefined, parentId:number){
+    this.store.dispatch(
+      commentsActions.createcommentreply({comment:contentComment,user:this.userLogged,replyingTo:replyingTo!==undefined?replyingTo:'',idParent:parentId})
+    )
+  }
 }
