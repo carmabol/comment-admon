@@ -6,6 +6,15 @@
   border-radius: 2%;
 }
 
+.comment-box-reply{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin-left: 50px;
+  width:47vw;
+  border-radius: 2%;
+}
+
 .img_logo{
   width: 40px;
   height:40px;

@@ -1,13 +1,17 @@
 
 <ng-container  *ngFor="let comment of commentList" >
-  <app-comment (scoreActions)="updateScoreComments($event)" (saveReplyActions)="sendReplyOfComment($event,userLogged.username,comment.id)"
+  <app-comment
+    (scoreActions)="updateScoreComments($event)"
+    (saveReplyActions)="sendReplyOfComment($event,userLogged.username,comment.id)"
     [comment]="comment"
     [userLogged]="userLogged"
     [flagSelf]="userLogged.username===comment.user.username"
   ></app-comment>
 
     <ng-container  *ngFor="let reply of comment.replies">
-      <app-comment (scoreActions)="updateScoreReplies($event,comment)" (saveReplyActions)="sendReplyOfReply($event,reply.user.username,reply.replyingParent)"
+      <app-comment
+      (scoreActions)="updateScoreReplies($event,comment)"
+      (saveReplyActions)="sendReplyOfReply($event,reply.user.username,reply.replyingParent)"
       [comment]="reply"
       [userLogged]="userLogged"
       [flagSelf]="userLogged.username===reply.user.username"

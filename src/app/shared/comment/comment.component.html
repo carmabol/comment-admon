@@ -1,4 +1,4 @@
-<div class="comment-box">
+<div [ngClass]="isReply ? 'comment-box-reply' : 'comment-box'">
   <div class="pointer-score">
     <app-pointer (levelPlus)="increaseScoreComment()" (levelMinus)="decreaseScoreComment()"
       [points]="comment.score"
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div class="separator-comments" *ngIf="replyClicked">
+<div class="separator-comments" *ngIf="replyClicked" class="widthReply">
   <app-reply (savingReply)="getReplyToSave($event)"
   [userLogged]="userLogged"
   [parentId]="getCommentReply().replyingParent"

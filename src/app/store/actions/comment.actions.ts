@@ -11,6 +11,8 @@ export const commentsActions=createActionGroup(
             updateScore:props<{commentId:number,increase:boolean}>(),
             updateScoreReply:props<{commentId:number,increase:boolean,idParent:number}>(),
             createComment:props<{comment:string,user:User}>(),
-            createCommentReply:props<{comment:string,user:User,replyingTo:string,idParent:number}>()
+            createCommentReply:props<{comment:string,user:User,replyingTo:string,idParent:number}>(),
+            deleteComment:props<{commentId:number}>(),
+            deleteCommentReply:props<{commentId:number,parentId:number}>(),
         }
     })

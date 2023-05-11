@@ -29,22 +29,7 @@ export class ReplyComponent {
   }
 
   sendCommentReply(){
-    console.log("Emit Reply...")
     this.savingReply.emit(this.areaComment.nativeElement.value)
-  }
-
-  createComment(){
-    this.store.dispatch(
-      commentsActions.createcomment({comment:this.areaComment.nativeElement.value,user:this.userLogged})
-    )
-    this.areaComment.nativeElement.reset();
-  }
-
-  createCommentReply(){
-    //--TODO:Emitir el contenido del comentario y llamar la accion en el componente princpial que lo usa
-    this.store.dispatch(
-      commentsActions.createcommentreply({comment:this.areaComment.nativeElement.value,user:this.userLogged,replyingTo:this.replyingTo,idParent:this.parentId})
-    )
   }
 
   saveComment(){

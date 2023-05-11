@@ -23,6 +23,18 @@ export class CommentListComponent implements OnInit {
   }
 
   constructor(private store:Store){
+    /** delete comment
+    this.store.dispatch(
+      commentsActions.deletecomment({commentId:1})
+    )
+    */
+
+    /** delete comment reply
+    this.store.dispatch(
+      commentsActions.deletecommentreply({commentId:3,parentId:2})
+    )
+    */
+
   }
 
   updateScoreComments(actualizar:{comment:Comment,increase:boolean}){

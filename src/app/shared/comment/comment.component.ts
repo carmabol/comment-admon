@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { commentsActions } from 'src/app/store/actions/comment.actions';
 import { User } from 'src/app/store/models/user.model';
@@ -13,7 +13,7 @@ import { ReplyComponent } from '../reply/reply.component';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.css']
 })
-export class CommentComponent {
+export class CommentComponent implements OnInit{
   @Input() comment!:Reply|Comment;
   @Input() userLogged!:User;
   @Input() flagSelf=true;
@@ -21,7 +21,15 @@ export class CommentComponent {
   @Output() saveCommentActions:EventEmitter<string>=new EventEmitter();
   @Output() saveReplyActions:EventEmitter<string>=new EventEmitter();
   replyClicked:boolean=false;
-
+  isReply:boolean=false;
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    if(this.comment && this.comment.hasOwnProperty('replyingTo')){
+      this.isReply=true;
+      console.log("Soy Replica");
+    }
+  }
 
 getCommentReply(){
   return this.comment as Reply;

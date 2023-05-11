@@ -163,10 +163,50 @@ export const commentReducer = createReducer(initialStateComment,
             let currentCommentListRO:readonly Comment[]=currentCommentList;
             return currentCommentListRO;
           }),
-          /*on(
-            commentsActions.createcommentreply,
-            (state,{comment,user,replyingTo,idParent,replyingParent})=>{
-              return null
-            })*/
+          on(
+            commentsActions.deletecomment,
+            (state,{commentId})=>{
+              let currentCommentList = [...state];
+              let filterCommentList=currentCommentList.filter(comment => comment.id > commentId);
+
+              console.log("Before Delete: ",state);
+
+              console.log("UpdateScore: ",currentCommentList);
+              let currentCommentListRO:readonly Comment[]=filterCommentList;
+              return currentCommentListRO;
+
+            }
+            ),
+            on(
+              commentsActions.deletecommentreply,
+              (state,{commentId,parentId})=>{
+
+
+                let currentCommentList = [...state];
+
+                let parentCommentToUpdate:Comment|undefined = currentCommentList.find( comment => comment.id === parentId);
+                let indexParent=0;
+                let replies:Reply[];
+                let parentCommentToUpdateManual:Comment|undefined
+                if(parentCommentToUpdate){
+                  indexParent=currentCommentList.indexOf(parentCommentToUpdate);
+                  replies=parentCommentToUpdate.replies.filter(comment => comment.id > commentId);
+                  currentCommentList[indexParent]={
+                    ...parentCommentToUpdate,
+                    replies: [
+                      ...replies
+                    ]
+                  } //commentToUpdateManual;
+                }
+                //let filterCommentList=currentCommentList.filter(comment => comment.id > commentId);
+
+                console.log("Before Delete: ",state);
+
+                console.log("UpdateScore: ",currentCommentList);
+                let currentCommentListRO:readonly Comment[]=currentCommentList;
+                return currentCommentListRO;
+              }
+              ),
+
     )
 
