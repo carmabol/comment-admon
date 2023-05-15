@@ -190,7 +190,7 @@ export const commentReducer = createReducer(initialStateComment,
                 let parentCommentToUpdateManual:Comment|undefined
                 if(parentCommentToUpdate){
                   indexParent=currentCommentList.indexOf(parentCommentToUpdate);
-                  replies=parentCommentToUpdate.replies.filter(comment => comment.id > commentId);
+                  replies=parentCommentToUpdate.replies.filter(comment => comment.id !== commentId);
                   currentCommentList[indexParent]={
                     ...parentCommentToUpdate,
                     replies: [

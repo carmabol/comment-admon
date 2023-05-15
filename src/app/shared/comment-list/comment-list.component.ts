@@ -18,6 +18,8 @@ import { ReplyComponent } from '../reply/reply.component';
 export class CommentListComponent implements OnInit {
   @Input() commentList:ReadonlyArray<Comment>=[];
   @Input() userLogged!:User;
+  commentToDelete:{commentId:number,commentParent:number,isReply:boolean}={commentId:-1,commentParent:-1,isReply:false};
+
   ngOnInit(): void {
 
   }
@@ -28,12 +30,12 @@ export class CommentListComponent implements OnInit {
       commentsActions.deletecomment({commentId:1})
     )
     */
-
-    /** delete comment reply
+/*
+  //delete comment reply
     this.store.dispatch(
-      commentsActions.deletecommentreply({commentId:3,parentId:2})
+      commentsActions.deletecommentreply({commentId:4,parentId:2})
     )
-    */
+*/
 
     /** update comment
     this.store.dispatch(
@@ -72,4 +74,60 @@ export class CommentListComponent implements OnInit {
       commentsActions.createcommentreply({comment:contentComment,user:this.userLogged,replyingTo:replyingTo!==undefined?replyingTo:'',idParent:parentId})
     )
   }
+
+  updateCommentToDelete(comment:{commentId:number,commentParent:number,isReply:boolean}|null){
+    if(!comment){
+      this.commentToDelete={commentId:-1,commentParent:-1,isReply:false};
+    }
+    else{
+      this.commentToDelete=comment;
+    }
+  }
+
+  deleteComment(){
+    const comment=this.commentToDelete;
+    if(comment.isReply){
+      console.log("Borraremos:",comment)
+      this.store.dispatch(
+        commentsActions.deletecommentreply({commentId:comment.commentId,parentId:comment.commentParent})
+      )
+    }else{
+      this.store.dispatch(
+        commentsActions.deletecomment({commentId:comment.commentId})
+      )
+    }
+
+    this.updateCommentToDelete(null);
+  }
+
+  editComment(editData:{
+    commentId:number,
+    parentId:number,
+    content:string,
+  }){
+    console.log("Editemos:",editData)
+    if(editData.parentId!==-1){
+      console.log("ejecutando updatecommentreply")
+      this.store.dispatch(
+        commentsActions.updatecommentreply({commentId:editData.commentId,content:editData.content,idParent:editData.parentId})
+      )
+    }else{
+      console.log("ejecutando updatecomment")
+      this.store.dispatch(
+        commentsActions.updatecomment({commentId:editData.commentId,content:editData.content})
+      )
+    }
+  }
+
+     /** update comment
+    this.store.dispatch(
+      commentsActions.updatecomment({commentId:2,content:'Titi si yo te estoy queriendo mucho'})
+    )
+    */
+
+    /** update comment reply
+    this.store.dispatch(
+      commentsActions.updatecommentreply({commentId:4,content:'Titi si yo te estoy queriendo mucho',idParent:2})
+    )
+    */
 }

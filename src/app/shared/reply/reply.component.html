@@ -3,10 +3,10 @@
     <img class="img_logo" [src]="userLogged.image&&userLogged.image.png?userLogged.image.png:imgLogo">
   </div>
   <div class="separator-elements">
-    <textarea rows="4" cols="75" placeholder="Type something" #areaComment></textarea>
+    <textarea rows="4" cols="75" placeholder="Type something" #areaComment>{{content}}</textarea>
     <!-- <input type="text" #areaComment placeholder="Type something"> -->
   </div>
   <div class="separator-elements">
-    <button class="btn btn-primary" (click)="saveComment()" >{{isReply?'Reply':'Send'}}</button>
+    <button class="btn btn-primary" (click)="isEditing?sendCommentToEdit():saveComment()" >{{isEditing?'Edit':isReply?'Reply':'Send'}}</button>
   </div>
 </div>
