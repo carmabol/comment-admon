@@ -167,7 +167,7 @@ export const commentReducer = createReducer(initialStateComment,
             commentsActions.deletecomment,
             (state,{commentId})=>{
               let currentCommentList = [...state];
-              let filterCommentList=currentCommentList.filter(comment => comment.id > commentId);
+              let filterCommentList=currentCommentList.filter(comment => comment.id !== commentId);
 
               console.log("Before Delete: ",state);
 

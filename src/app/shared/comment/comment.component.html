@@ -8,10 +8,10 @@
   <div class="texto">
     <div class="flex-user">
       <div>
-      <img class="img_logo" [src]="comment && comment.user&& comment.user.image ? comment.user.image.png :'assets/img/default-logo.jpg'"> &nbsp; <strong>{{comment&&comment.user ?comment.user.username:''}}</strong> {{comment.createdAt}}
+      <img class="img_logo" [src]="comment.user.image?.png ?? 'assets/img/default-logo.jpg'"> &nbsp; <strong>{{comment.user.username ?? ''}}</strong> {{comment.createdAt}}
     </div>
     <div class="padd-button button-text">
-      <button type="button" class="btn btn-danger" *ngIf="flagSelf" data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-backdrop="static" (click)="sendCommentToDelete(comment.id,isReply?getCommentReply().replyingParent:-1,isReply)">Delete</button>&nbsp;
+      <button type="button" class="btn btn-danger" *ngIf="flagSelf" (click)="sendCommentToDelete()">Delete</button>&nbsp;
       <button type="button" class="btn btn-warning"*ngIf="flagSelf" (click)="isEditing=true">Edit</button>
       <button type="button" class="btn btn-info" *ngIf="!flagSelf" (click)="replyClickedEvent()">Reply</button>
     </div>
@@ -24,16 +24,10 @@
 </div>
 
 
-<div class="separator-comments comment-box-reply widthReply" *ngIf="replyClicked||isEditing" >
-  <app-reply (savingReply)="getReplyToSave($event)"
-  (editComment)="sendCommentToEdit($event)"
-  [userLogged]="userLogged"
-  [content]="isEditing?comment.content:''"
-  [commentId]="isEditing?comment.id:-1"
-  [parentId]="getCommentReply().replyingParent"
-  [isReply]="replyClicked || (this.comment && this.comment.hasOwnProperty('replyTo'))"
-  [isEditing]="isEditing"
-  [replyingTo]="comment&&comment.user&&comment.user.username ?comment.user.username:''"
+<div class="separator-comments comment-box-reply widthReply" *ngIf="replyClicked" >
+  <app-reply (savingComment)="getReplyToSave($event)"
+  [userImage]="userLogged.image?.png??''"
+  [userReply]="getCommentReply().replyTo"
   ></app-reply>
 </div>
 

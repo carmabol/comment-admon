@@ -21,7 +21,7 @@ export class CommentComponent implements OnInit{
   @Output() scoreActions:EventEmitter<{comment:Comment|Reply,increase:boolean}>=new EventEmitter();
   @Output() saveCommentActions:EventEmitter<string>=new EventEmitter();
   @Output() saveReplyActions:EventEmitter<string>=new EventEmitter();
-  @Output() deleteCommentActions:EventEmitter<{commentId:number,commentParent:number,isReply:boolean}>=new EventEmitter();
+  @Output() deleteCommentActions:EventEmitter<Comment| Reply>=new EventEmitter();
   @Output() editCommentActions:EventEmitter<{commentId:number,parentId:number,content:string}>=new EventEmitter();
 
   replyClicked:boolean=false;
@@ -62,8 +62,8 @@ getCommentReply(){
     this.saveReplyActions.emit(contentComment);
   }
 
-  sendCommentToDelete(commentId:number,commentParent:number,isReply:boolean){
-    this.deleteCommentActions.emit({commentId:commentId,commentParent:commentParent, isReply:isReply})
+  sendCommentToDelete(){
+    this.deleteCommentActions.emit(this.comment)
   }
 
   sendCommentToEdit(editData:{

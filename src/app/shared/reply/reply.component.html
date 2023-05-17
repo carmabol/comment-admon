@@ -1,12 +1,12 @@
 <div class="reply-box">
   <div class="separator-elements">
-    <img class="img_logo" [src]="userLogged.image&&userLogged.image.png?userLogged.image.png:imgLogo">
+    <img class="img_logo" [src]="userImage">
   </div>
   <div class="separator-elements">
-    <textarea rows="4" cols="75" placeholder="Type something" #areaComment>{{content}}</textarea>
+    <textarea rows="4" cols="75" placeholder="Type something" [(ngModel)]="content">{{userReply? '@' + userReply : ''}}{{content}}</textarea>
     <!-- <input type="text" #areaComment placeholder="Type something"> -->
   </div>
   <div class="separator-elements">
-    <button class="btn btn-primary" (click)="isEditing?sendCommentToEdit():saveComment()" >{{isEditing?'Edit':isReply?'Reply':'Send'}}</button>
+    <button class="btn btn-primary" (click)="sendComment()" >{{isReply?'Reply':'Send'}}</button>
   </div>
 </div>

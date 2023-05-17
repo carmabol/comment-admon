@@ -20,7 +20,6 @@ export class MainComponent implements OnInit {
   today:Date=new Date();
   commentList$:Observable<ReadonlyArray<Comment>> | undefined;
   user$!:Observable<User> | undefined;
-  userLogged!: User;
 
   constructor(private store:Store) {
     this.store.dispatch(
@@ -51,15 +50,14 @@ export class MainComponent implements OnInit {
     this.user$.subscribe(
       (data)=>{
         console.log("Usuario Logueado",data);
-        this.userLogged=data;
       }
     )
 
   }
 
-  saveComment(commentContent:string){
+  saveComment(commentContent:string,userLogged:User){
     this.store.dispatch(
-      commentsActions.createcomment({comment:commentContent,user:this.userLogged})
+      commentsActions.createcomment({comment:commentContent,user:userLogged})
     )
   }
 

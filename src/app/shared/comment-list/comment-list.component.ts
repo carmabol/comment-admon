@@ -18,7 +18,7 @@ import { ReplyComponent } from '../reply/reply.component';
 export class CommentListComponent implements OnInit {
   @Input() commentList:ReadonlyArray<Comment>=[];
   @Input() userLogged!:User;
-  commentToDelete:{commentId:number,commentParent:number,isReply:boolean}={commentId:-1,commentParent:-1,isReply:false};
+  commentToDelete!:Comment|Reply;
 
   ngOnInit(): void {
 
@@ -69,25 +69,19 @@ export class CommentListComponent implements OnInit {
     )
   }
 
-  sendReplyOfReply(contentComment:string, replyingTo:string|undefined, parentId:number){
-    this.store.dispatch(
-      commentsActions.createcommentreply({comment:contentComment,user:this.userLogged,replyingTo:replyingTo!==undefined?replyingTo:'',idParent:parentId})
-    )
-  }
+  deleteComment(comment: Comment|Reply){
+   this.commentToDelete = comment;
+    console.log("Borraremos:",comment)
+    const confirmResponse:boolean = confirm('¿Estás de acuerdo en eliminar?');
 
-  updateCommentToDelete(comment:{commentId:number,commentParent:number,isReply:boolean}|null){
-    if(!comment){
-      this.commentToDelete={commentId:-1,commentParent:-1,isReply:false};
+    if(confirmResponse) {
+        this.store.dispatch(
+          commentsActions.deletecomment({commentId:comment.id})
+        )
     }
-    else{
-      this.commentToDelete=comment;
-    }
-  }
 
-  deleteComment(){
-    const comment=this.commentToDelete;
-    if(comment.isReply){
-      console.log("Borraremos:",comment)
+  //  $('#exampleModal').modal('show')
+    /*if(comment.isReply){
       this.store.dispatch(
         commentsActions.deletecommentreply({commentId:comment.commentId,parentId:comment.commentParent})
       )
@@ -95,9 +89,21 @@ export class CommentListComponent implements OnInit {
       this.store.dispatch(
         commentsActions.deletecomment({commentId:comment.commentId})
       )
-    }
+    }*/
 
-    this.updateCommentToDelete(null);
+   // this.updateCommentToDelete(null);
+  }
+
+  deleteCommentReply(comment:Comment|Reply){
+    this.commentToDelete = comment;
+    console.log("Borraremos:",comment)
+    const confirmResponse:boolean = confirm('¿Estás de acuerdo en eliminar?');
+/**TODO: Crear componente para modal */
+    if(confirmResponse) {
+        this.store.dispatch(
+          commentsActions.deletecommentreply({commentId:comment.id,parentId:(comment as Reply).replyingParent})
+        )
+    }
   }
 
   editComment(editData:{

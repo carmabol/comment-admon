@@ -1,9 +1,9 @@
 <p>Comments</p>
-
+<ng-container *ngIf="user$|async as user">
 <div class="separator-comments">
   <app-comment-list
     [commentList]="(commentList$ | async)!"
-    [userLogged]="(user$ | async)!"
+    [userLogged]="user"
 ></app-comment-list>
 </div>
 <!--
@@ -11,8 +11,8 @@
   <app-reply [userLogged]="(user$ | async)!"></app-reply>
 </div>-->
 <div class="separator-comments">
-  <app-reply (savingComment)="saveComment($event)"
-  [userLogged]="(user$ | async)!"
-  [isReply]="false"
+  <app-reply (savingComment)="saveComment($event,user)"
+  [userImage]="user.image?.png??''"
   ></app-reply>
 </div>
+</ng-container>

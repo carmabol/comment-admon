@@ -3,7 +3,7 @@
   <app-comment
     (scoreActions)="updateScoreComments($event)"
     (saveReplyActions)="sendReplyOfComment($event,comment.user.username,comment.id)"
-    (deleteCommentActions)="updateCommentToDelete($event)"
+    (deleteCommentActions)="deleteComment($event)"
     (editCommentActions)="editComment($event)"
     [comment]="comment"
     [userLogged]="userLogged"
@@ -13,8 +13,8 @@
     <ng-container  *ngFor="let reply of comment.replies">
       <app-comment
       (scoreActions)="updateScoreReplies($event,comment)"
-      (saveReplyActions)="sendReplyOfReply($event,reply.user.username,reply.replyingParent)"
-      (deleteCommentActions)="updateCommentToDelete($event)"
+      (saveReplyActions)="sendReplyOfComment($event,reply.user.username,reply.replyingParent)"
+      (deleteCommentActions)="deleteCommentReply($event)"
       (editCommentActions)="editComment($event)"
       [comment]="reply"
       [userLogged]="userLogged"
@@ -23,21 +23,3 @@
 
     </ng-container>
 </ng-container>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Comment</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are yo sure you want to delete this comment¿?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="updateCommentToDelete(null)">No!</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteComment()">Yes!</button>
-      </div>
-    </div>
-  </div>
-</div>
